@@ -19,7 +19,6 @@ class UsersViewController: UIViewController {
     @IBOutlet weak var tableView:UITableView!
     let detailSegueId = "goToDetail"
     var detailAction:UserAction = UserAction.create
-    var selectedUser:User?
     
     
     lazy var fetchedResultsController: NSFetchedResultsController<User> = {
@@ -33,6 +32,10 @@ class UsersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUsers()
+        setup()
+    }
+    
+    func setup() {
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -82,8 +85,14 @@ extension UsersViewController: NSFetchedResultsControllerDelegate {
             if let indexToDelete = indexPath {
                 tableView.deleteRows(at: [indexToDelete], with: .automatic)
             }
-        default:
-            break
+        case .move:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            
+            if let newIndexPath = newIndexPath {
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
         }
     }
     

@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Users View Controller-->
+        <!--Users-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="UsersViewController" customModule="UserProfile" customModuleProvider="target" sceneMemberID="viewController">
@@ -67,7 +67,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="yXs-00-ATp">
+                    <navigationItem key="navigationItem" title="Users" id="yXs-00-ATp">
                         <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="8CR-6R-RpS">
                             <connections>
                                 <action selector="refreshBtnTapped:" destination="BYZ-38-t0r" id="dkT-F9-aL1"/>
@@ -164,24 +164,35 @@
                                     <action selector="cancelBtnTapped:" destination="CEZ-zX-iDj" eventType="touchUpInside" id="gza-EL-v7F"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Rzh-S9-UIm">
+                                <rect key="frame" x="166.5" y="45" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="4YG-cJ-0mf" firstAttribute="centerX" secondItem="reM-i2-zMt" secondAttribute="centerX" id="4Z7-NH-5RL"/>
                             <constraint firstItem="dg5-B2-jxU" firstAttribute="top" secondItem="reM-i2-zMt" secondAttribute="top" constant="20" id="Gr8-7v-ZY4"/>
+                            <constraint firstItem="Rzh-S9-UIm" firstAttribute="centerY" secondItem="vbj-r3-JHj" secondAttribute="centerY" id="Lr6-Lp-sCa"/>
+                            <constraint firstItem="Rzh-S9-UIm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vbj-r3-JHj" secondAttribute="trailing" constant="10" id="NIm-tx-UoR"/>
                             <constraint firstItem="vbj-r3-JHj" firstAttribute="top" secondItem="reM-i2-zMt" secondAttribute="top" constant="20" id="Nce-XF-hCk"/>
                             <constraint firstItem="DyS-pj-w23" firstAttribute="top" secondItem="4YG-cJ-0mf" secondAttribute="bottom" constant="50" id="WpB-7l-gpr"/>
                             <constraint firstItem="reM-i2-zMt" firstAttribute="trailing" secondItem="DyS-pj-w23" secondAttribute="trailing" constant="10" id="YqT-9M-9Sf"/>
                             <constraint firstItem="reM-i2-zMt" firstAttribute="trailing" secondItem="dg5-B2-jxU" secondAttribute="trailing" constant="20" id="hxo-kD-1sb"/>
+                            <constraint firstItem="Rzh-S9-UIm" firstAttribute="centerX" secondItem="gk6-tU-6Au" secondAttribute="centerX" id="kie-TT-VsY"/>
                             <constraint firstItem="vbj-r3-JHj" firstAttribute="leading" secondItem="reM-i2-zMt" secondAttribute="leading" constant="20" id="ney-3s-KXR"/>
                             <constraint firstItem="4YG-cJ-0mf" firstAttribute="top" secondItem="vbj-r3-JHj" secondAttribute="bottom" constant="50" id="oc4-yc-2yo"/>
                             <constraint firstItem="reM-i2-zMt" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DyS-pj-w23" secondAttribute="bottom" constant="10" id="rLI-BN-uQ9"/>
                             <constraint firstItem="DyS-pj-w23" firstAttribute="leading" secondItem="reM-i2-zMt" secondAttribute="leading" constant="10" id="rlf-Jh-OVe"/>
+                            <constraint firstItem="dg5-B2-jxU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Rzh-S9-UIm" secondAttribute="trailing" constant="10" id="uCu-qE-kuf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="reM-i2-zMt"/>
                     </view>
                     <connections>
                         <outlet property="imgViewProfile" destination="4YG-cJ-0mf" id="Gbv-t5-aQp"/>
+                        <outlet property="lblTitle" destination="Rzh-S9-UIm" id="OA0-Yv-Tum"/>
                         <outlet property="txtFieldEmail" destination="Gxx-8T-m8E" id="2KL-7X-85B"/>
                         <outlet property="txtFieldFirstName" destination="VgB-EG-vwy" id="tBN-fA-1wg"/>
                         <outlet property="txtFieldLastName" destination="si0-u5-AdL" id="YMn-hu-Hxo"/>

@@ -30,11 +30,9 @@ class UserController:NSObject {
                         }
                         
                     }
-                    
                 } catch let error {
                     print(error)
                 }
-                
                 CoreDataStack.saveContext()
             case .Error(let message):
                 print(message)
@@ -51,6 +49,7 @@ class UserController:NSObject {
             
             switch result {
             case .Success(let data):
+                //If success, update the user with the id from the server
                 user.updateIdFrom(data: data)
                 completion(true, nil)
             case .Error(let message):

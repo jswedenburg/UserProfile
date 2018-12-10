@@ -34,7 +34,7 @@ class NetworkManager {
     }
     
     func dataRequestForUrl(url: String, httpMethod: HTTPMethod, body: Data? = nil, completion: @escaping (_ result: Result<Data>) -> Void) {
-        let requestUrl = URL(string: url)!
+        guard let requestUrl = URL(string: url) else { return completion(.Error("Bad url string")) }
 
         var request = URLRequest(url: requestUrl)
         request.httpMethod = httpMethod.rawValue

@@ -11,6 +11,7 @@ import CoreData
 
 class UserDetailViewController: UIViewController {
     
+    @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var imgViewProfile: UIImageView!
     @IBOutlet weak var txtFieldFirstName:UITextField!
     @IBOutlet weak var txtFieldLastName:UITextField!
@@ -27,15 +28,18 @@ class UserDetailViewController: UIViewController {
         super.viewDidLoad()
         populateFields()
         imgViewProfile.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileImgTapped)))
+        txtFields.forEach({$0.delegate = self})
     }
     
     func populateFields() {
         imgViewProfile.image = UIImage(named: "ic_user")
         switch action {
         case .create:
+            lblTitle.text = "Add a new user"
             //No need to populate if created
             break
         case .update(let user):
+            lblTitle.text = "Update \(user.firstName)"
             txtFieldFirstName.text = user.firstName
             txtFieldLastName.text = user.lastName
             txtFieldEmail.text = user.email
@@ -84,6 +88,7 @@ class UserDetailViewController: UIViewController {
                         self.dismiss(animated: true, completion: nil)
                     }
                 } else {
+                    //If save fails, delete user from store and show error message
                     UserController.shared.deleteUser(user: newUser)
                     DispatchQueue.main.async {
                         self.showErrorWith(message: "Failed to add user. Try again later")
@@ -99,7 +104,10 @@ class UserDetailViewController: UIViewController {
                         self.dismiss(animated: true, completion: nil)
                     }
                 } else {
-                    CoreDataStack.context.reset()
+                    // If update fails, discard changes made to user
+                    if CoreDataStack.context.hasChanges {
+                        CoreDataStack.context.rollback()
+                    }
                     DispatchQueue.main.async {
                         self.showErrorWith(message: "Failed to update user. Try again later")
                     }
@@ -158,5 +166,25 @@ extension UserDetailViewController: UIImagePickerControllerDelegate, UINavigatio
         }
         
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension UserDetailViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == txtFieldFirstName {
+            txtFieldLastName.becomeFirstResponder()
+        } else if textField == txtFieldLastName {
+            txtFieldName.becomeFirstResponder()
+        } else if textField == txtFieldName {
+            txtFieldEmail.becomeFirstResponder()
+        } else if textField == txtFieldEmail {
+            txtFieldPhone.becomeFirstResponder()
+        } else if textField == txtFieldPhone {
+            txtFieldZip.becomeFirstResponder()
+        } else if textField == txtFieldZip {
+            txtFieldTenant.becomeFirstResponder()
+        }
+        
+        return true
     }
 }

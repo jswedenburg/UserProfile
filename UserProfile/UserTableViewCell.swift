@@ -18,7 +18,6 @@ class UserTableViewCell: UITableViewCell {
         if let profileDate = user.profilePhoto {
             let data = Data(base64Encoded: profileDate, options: .ignoreUnknownCharacters)!
             imgViewProfilePic.image = UIImage(data: data)
-            
         } else {
             imgViewProfilePic.image = UIImage(named: "ic_user")
         }
