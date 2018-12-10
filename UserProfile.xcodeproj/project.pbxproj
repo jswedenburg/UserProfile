@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8110CEBD21B7462A0095B9AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8110CEBC21B7462A0095B9AA /* AppDelegate.swift */; };
-		8110CEBF21B7462A0095B9AA /* ClientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8110CEBE21B7462A0095B9AA /* ClientsViewController.swift */; };
+		8110CEBF21B7462A0095B9AA /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8110CEBE21B7462A0095B9AA /* UserViewController.swift */; };
 		8110CEC221B7462A0095B9AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8110CEC021B7462A0095B9AA /* Main.storyboard */; };
 		8110CEC521B7462A0095B9AA /* UserProfile.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8110CEC321B7462A0095B9AA /* UserProfile.xcdatamodeld */; };
 		8110CEC721B7462C0095B9AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8110CEC621B7462C0095B9AA /* Assets.xcassets */; };
@@ -22,7 +22,7 @@
 		8161033B21B82FC100CC4132 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161033A21B82FC100CC4132 /* NetworkManager.swift */; };
 		816C39D521B89845009B48BB /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816C39D421B89845009B48BB /* CoreDataStack.swift */; };
 		816C39D721B89CD6009B48BB /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816C39D621B89CD6009B48BB /* UserController.swift */; };
-		816C39DA21B9854D009B48BB /* ClientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816C39D821B9854D009B48BB /* ClientDetailViewController.swift */; };
+		816C39DA21B9854D009B48BB /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816C39D821B9854D009B48BB /* UserDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +45,7 @@
 /* Begin PBXFileReference section */
 		8110CEB921B7462A0095B9AA /* UserProfile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UserProfile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8110CEBC21B7462A0095B9AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8110CEBE21B7462A0095B9AA /* ClientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsViewController.swift; sourceTree = "<group>"; };
+		8110CEBE21B7462A0095B9AA /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		8110CEC121B7462A0095B9AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8110CEC421B7462A0095B9AA /* UserProfile.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserProfile.xcdatamodel; sourceTree = "<group>"; };
 		8110CEC621B7462C0095B9AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -64,7 +64,7 @@
 		8161033A21B82FC100CC4132 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		816C39D421B89845009B48BB /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		816C39D621B89CD6009B48BB /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
-		816C39D821B9854D009B48BB /* ClientDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientDetailViewController.swift; sourceTree = "<group>"; };
+		816C39D821B9854D009B48BB /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,8 +160,8 @@
 		8161033D21B82FCF00CC4132 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				8110CEBE21B7462A0095B9AA /* ClientsViewController.swift */,
-				816C39D821B9854D009B48BB /* ClientDetailViewController.swift */,
+				8110CEBE21B7462A0095B9AA /* UserViewController.swift */,
+				816C39D821B9854D009B48BB /* UserDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -312,8 +312,8 @@
 				816C39D721B89CD6009B48BB /* UserController.swift in Sources */,
 				8110CEF221B74EA20095B9AA /* UserTableViewCell.swift in Sources */,
 				816C39D521B89845009B48BB /* CoreDataStack.swift in Sources */,
-				816C39DA21B9854D009B48BB /* ClientDetailViewController.swift in Sources */,
-				8110CEBF21B7462A0095B9AA /* ClientsViewController.swift in Sources */,
+				816C39DA21B9854D009B48BB /* UserDetailViewController.swift in Sources */,
+				8110CEBF21B7462A0095B9AA /* UserViewController.swift in Sources */,
 				8161033B21B82FC100CC4132 /* NetworkManager.swift in Sources */,
 				8110CEC521B7462A0095B9AA /* UserProfile.xcdatamodeld in Sources */,
 				8133092E21BE0E7700596E19 /* Extensions.swift in Sources */,
