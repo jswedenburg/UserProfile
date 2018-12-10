@@ -31,8 +31,9 @@ class UserDetailViewController: UIViewController {
         txtFields.forEach({$0.delegate = self})
     }
     
+    
+    //MARK: Initial Setup
     func populateFields() {
-        imgViewProfile.image = UIImage(named: "ic_user")
         switch action {
         case .create:
             lblTitle.text = "Add a new user"
@@ -47,13 +48,34 @@ class UserDetailViewController: UIViewController {
             txtFieldZip.text = user.zipCode
             txtFieldName.text = user.name
             txtFieldTenant.text = user.tenant
-            if let profileDate = user.profilePhoto {
-                let data = Data(base64Encoded: profileDate, options: .ignoreUnknownCharacters)!
-                imgViewProfile.image = UIImage(data: data)
-                
-            } else {
-                imgViewProfile.image = UIImage(named: "ic_user")
+            fetchProfilePhoto(user: user)
+        }
+    }
+    
+    func fetchProfilePhoto(user: User) {
+        if let _ = user.profilePhoto {
+            setProfilePic(user: user)
+            return
+        }
+        
+        showProgressIndicator()
+        
+        UserController.shared.fetchUserProfilePic(user: user) { (success, error) in
+            if success {
+                CoreDataStack.saveContext()
             }
+            DispatchQueue.main.async {
+                self.hideProgressIndicator()
+                self.setProfilePic(user: user)
+            }
+        }
+    }
+    
+    func setProfilePic(user: User) {
+        if let base64String = user.profilePhoto, let data = Data(base64Encoded: base64String, options: .ignoreUnknownCharacters) {
+            self.imgViewProfile.image = UIImage(data: data)
+        } else {
+            self.imgViewProfile.image = UIImage(named: "ic_user")
         }
     }
     
@@ -77,11 +99,7 @@ class UserDetailViewController: UIViewController {
     }
     
     @IBAction func saveBtnTapped(_ sender: Any) {
-        let progressSize: CGFloat = 30.0
-        let progressView = UIActivityIndicatorView(frame: CGRect(x: (self.view.frame.width / 2.0) - progressSize / 2.0, y: (self.view.frame.height / 2.0) - progressSize / 2.0, width: progressSize, height: progressSize))
-        progressView.style = .gray
-        self.view.addSubview(progressView)
-        progressView.startAnimating()
+        showProgressIndicator()
         switch action {
         case .create:
             let newUser = NSEntityDescription.insertNewObject(forEntityName: User.entityDescription, into: CoreDataStack.context) as! User
@@ -90,14 +108,14 @@ class UserDetailViewController: UIViewController {
                 if success {
                     CoreDataStack.saveContext()
                     DispatchQueue.main.async {
-                        progressView.removeFromSuperview()
+                        self.hideProgressIndicator()
                         self.dismiss(animated: true, completion: nil)
                     }
                 } else {
                     //If save fails, delete user from store and show error message
                     UserController.shared.deleteUser(user: newUser)
                     DispatchQueue.main.async {
-                        progressView.removeFromSuperview()
+                        self.hideProgressIndicator()
                         self.showErrorWith(message: "Failed to add user. Try again later")
                     }
                 }
@@ -108,7 +126,7 @@ class UserDetailViewController: UIViewController {
                 if success {
                     CoreDataStack.saveContext()
                     DispatchQueue.main.async {
-                        progressView.removeFromSuperview()
+                       self.hideProgressIndicator()
                         self.dismiss(animated: true, completion: nil)
                     }
                 } else {
@@ -117,7 +135,7 @@ class UserDetailViewController: UIViewController {
                         CoreDataStack.context.rollback()
                     }
                     DispatchQueue.main.async {
-                        progressView.removeFromSuperview()
+                        self.hideProgressIndicator()
                         self.showErrorWith(message: "Failed to update user. Try again later")
                     }
                 }
@@ -126,6 +144,18 @@ class UserDetailViewController: UIViewController {
     }
     
     //MARK: Helper Methods
+    var progressView = UIActivityIndicatorView()
+    func showProgressIndicator() {
+        let progressSize: CGFloat = 30.0
+        progressView = UIActivityIndicatorView(frame: CGRect(x: (self.view.frame.width / 2.0) - progressSize / 2.0, y: (self.view.frame.height / 2.0) - progressSize / 2.0, width: progressSize, height: progressSize))
+        progressView.style = .gray
+        self.view.addSubview(progressView)
+        progressView.startAnimating()
+    }
+    
+    func hideProgressIndicator() {
+        progressView.removeFromSuperview()
+    }
     func updateUserWithFields(user: User) {
         user.firstName = txtFieldFirstName.text ?? ""
         user.lastName = txtFieldLastName.text ?? ""

@@ -15,8 +15,7 @@ class UserTableViewCell: UITableViewCell {
     
     func updateWith(user: User) {
         lblName.text = "\(user.firstName) \(user.lastName)"
-        if let profileDate = user.profilePhoto {
-            let data = Data(base64Encoded: profileDate, options: .ignoreUnknownCharacters)!
+        if let base64String = user.profilePhoto, let data = Data(base64Encoded: base64String, options: .ignoreUnknownCharacters) {
             imgViewProfilePic.image = UIImage(data: data)
         } else {
             imgViewProfilePic.image = UIImage(named: "ic_user")

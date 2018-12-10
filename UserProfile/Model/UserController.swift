@@ -41,6 +41,20 @@ class UserController:NSObject {
         }
     }
     
+    func fetchUserProfilePic(user: User, completion: @escaping ResponseClosure) {
+        let manager = NetworkManager()
+        manager.dataRequestForUrl(url: manager.getUserUrl(id: user.guid ?? ""), httpMethod: .Get) { (result) in
+            switch result {
+            case .Success(let data):
+                user.updateProfilePicFrom(data: data)
+                completion(true, nil)
+            case .Error(let message):
+                completion(false, message)
+                print(message)
+            }
+        }
+    }
+    
     func addUser(user: User, completion: @escaping ResponseClosure) {
         let encoder = JSONEncoder()
         let userData = try? encoder.encode(user)

@@ -63,4 +63,14 @@ public class User: NSManagedObject, Encodable {
             print(error)
         }
     }
+    
+    func updateProfilePicFrom(data: Data)  {
+        do {
+            if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [[String: AnyObject]] {
+                self.profilePhoto = json[0][CodingKeys.profilePhoto.rawValue] as? String ?? ""
+            }
+        } catch let error {
+            print(error)
+        }
+    }
 }
