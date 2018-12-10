@@ -77,6 +77,11 @@ class UserDetailViewController: UIViewController {
     }
     
     @IBAction func saveBtnTapped(_ sender: Any) {
+        let progressSize: CGFloat = 30.0
+        let progressView = UIActivityIndicatorView(frame: CGRect(x: (self.view.frame.width / 2.0) - progressSize / 2.0, y: (self.view.frame.height / 2.0) - progressSize / 2.0, width: progressSize, height: progressSize))
+        progressView.style = .gray
+        self.view.addSubview(progressView)
+        progressView.startAnimating()
         switch action {
         case .create:
             let newUser = NSEntityDescription.insertNewObject(forEntityName: User.entityDescription, into: CoreDataStack.context) as! User
@@ -85,12 +90,14 @@ class UserDetailViewController: UIViewController {
                 if success {
                     CoreDataStack.saveContext()
                     DispatchQueue.main.async {
+                        progressView.removeFromSuperview()
                         self.dismiss(animated: true, completion: nil)
                     }
                 } else {
                     //If save fails, delete user from store and show error message
                     UserController.shared.deleteUser(user: newUser)
                     DispatchQueue.main.async {
+                        progressView.removeFromSuperview()
                         self.showErrorWith(message: "Failed to add user. Try again later")
                     }
                 }
@@ -101,6 +108,7 @@ class UserDetailViewController: UIViewController {
                 if success {
                     CoreDataStack.saveContext()
                     DispatchQueue.main.async {
+                        progressView.removeFromSuperview()
                         self.dismiss(animated: true, completion: nil)
                     }
                 } else {
@@ -109,6 +117,7 @@ class UserDetailViewController: UIViewController {
                         CoreDataStack.context.rollback()
                     }
                     DispatchQueue.main.async {
+                        progressView.removeFromSuperview()
                         self.showErrorWith(message: "Failed to update user. Try again later")
                     }
                 }
