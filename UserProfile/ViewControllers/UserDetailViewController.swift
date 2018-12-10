@@ -126,7 +126,7 @@ class UserDetailViewController: UIViewController {
         user.phoneNumber = txtFieldPhone.text ?? ""
         user.tenant = txtFieldTenant.text ?? ""
         if let image = imgViewProfile.image {
-            user.profilePhoto = image.toBase64String()
+            user.profilePhoto = image.toBase64String(compressedSize: CGFloat(0.512))
         }
     }
     
